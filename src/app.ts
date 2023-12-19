@@ -1,4 +1,4 @@
-import Main from '../pages';
+import Main from './pages';
 
 type AppProp = {
   $app: HTMLDivElement | null;
