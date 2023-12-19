@@ -1,5 +1,5 @@
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-  <div> 
-  jei-ojt week1
-  </div>
-`;
+import App from './components/App';
+
+const $app = document.querySelector<HTMLDivElement>('#app');
+
+App({ $app });
