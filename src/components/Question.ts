@@ -84,7 +84,33 @@ class Question {
       rectStyle: 'stroke:#67D091; fill: none',
     });
 
+    const svgRectOptionBG = new SVGRect({
+      rectWidth: '454px',
+      rectHeight: '50px',
+      locX: '23',
+      locY: '572',
+      rectStyle: 'fill:#D9D9D9; rx: 10px; ry:10px',
+    });
+
     svgElement.appendChild(svgRectAnswer.render());
+    svgElement.appendChild(svgRectOptionBG.render());
+
+    const createOptionBar = () => {
+      let locXvalue = 27;
+
+      for (let i = 0; i < 10; i++) {
+        const svgRectOptionButton = new SVGRect({
+          rectWidth: '40px',
+          rectHeight: '40px',
+          locX: i !== 0 ? String(locXvalue + 45 * i) : String(locXvalue),
+          locY: '577',
+          rectStyle: 'fill:#FFFEFE; rx: 10px; ry:10px',
+        });
+        svgElement.appendChild(svgRectOptionButton.render());
+      }
+    };
+
+    createOptionBar();
 
     // optionBar 생성
     this.Question.appendChild(
