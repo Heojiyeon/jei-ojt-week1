@@ -5,9 +5,7 @@ class Question {
   private order: number;
   private leftNumber: number;
   private rightNumber: number;
-  private answer: number;
 
-  private isCorrect: boolean;
   private setIsCorrect: (currentSelctedOption: number, order: number) => void;
 
   private selectedOptionValue: number;
@@ -19,15 +17,11 @@ class Question {
     order,
     leftNumber,
     rightNumber,
-    answer,
-    isCorrect,
     setIsCorrect,
   }: QuestionContent) {
     this.order = order;
     this.leftNumber = leftNumber;
     this.rightNumber = rightNumber;
-    this.answer = answer;
-    this.isCorrect = isCorrect;
 
     this.setIsCorrect = setIsCorrect;
 
