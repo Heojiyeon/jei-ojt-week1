@@ -1,6 +1,6 @@
 import { QuestionContent } from '../pages/question';
 import OptionBar from './common/OptionBar';
-import SVGText from './common/SVGText';
+import SVGText from './svg/SVGText';
 
 class Question {
   private order: number;
