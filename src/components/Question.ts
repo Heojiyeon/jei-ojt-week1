@@ -35,10 +35,6 @@ class Question {
     };
 
     this.Question = document.createElement('div');
-    this.Question.innerHTML = `
-     <h2>${this.order}. 다음 덧셈을 입력하세요.</h2>
-     <div>${this.leftNumber} + ${this.rightNumber}</div>
-     `;
 
     // svg 생성
     const svgElement = document.createElementNS(
@@ -46,28 +42,39 @@ class Question {
       'svg'
     );
 
-    svgElement.setAttribute('width', '300px');
-    svgElement.setAttribute('height', '300px');
+    svgElement.setAttribute('width', '500px');
+    svgElement.setAttribute('height', '800px');
     svgElement.setAttribute('viewbox', '0 0 800 500');
 
     this.Question.appendChild(svgElement);
 
     // svg 에 text 컴포넌트 생성
-    const svgText = new SVGText({
+    const svgTextTitle = new SVGText({
       textContent: `${this.order}. 다음 덧셈을 하세요.`,
+      textWeight: 'Bold',
+      locX: '27',
+      locY: '179',
     });
 
-    svgElement.appendChild(svgText.render());
+    const svgTextFormula = new SVGText({
+      textContent: `${this.leftNumber} + ${this.rightNumber} = `,
+      textWeight: 'Medium',
+      locX: '177',
+      locY: '415',
+    });
+
+    const svgTextRemaining = new SVGText({
+      textContent: `남은 문제 수 : ${10 - this.order}`,
+      textWeight: 'Bold',
+      locX: '278',
+      locY: '757',
+    });
+
+    svgElement.appendChild(svgTextTitle.render());
+    svgElement.appendChild(svgTextFormula.render());
+    svgElement.appendChild(svgTextRemaining.render());
 
     // optionBar 생성
-    /**
-     * OptionBar 생성
-     * 1. Question에 클릭된 값을 담을 수 있는 selctedOptionValue 생성
-     * 2. option 클릭 시, 해당 값을 변경할 수 있는 onClick 함수 전달
-     * 2. selectedOptionValue 가 -1이 아닌 경우, this.answer와 동등 비교
-     * 3. 정답 유무에 따라 isCorrect 값 변경
-     * 4. 다음 문제 출력
-     */
     this.Question.appendChild(
       new OptionBar({
         onClick: this.setSelectedOptionValue,
