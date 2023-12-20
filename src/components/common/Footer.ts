@@ -10,7 +10,7 @@ class Footer {
     this.rate = rate;
     this.Footer = document.createElement('div');
 
-    this.Footer.innerText = `Footer`;
+    this.Footer.innerText = `남은 문제 수: ${10 - this.rate}`;
   }
 
   render(): HTMLDivElement {
