@@ -11,6 +11,7 @@ export interface QuestionContent {
   rightNumber: number;
   answer: number;
   isCorrect: boolean;
+  setIsCorrect: (currentSelctedOption: number, order: number) => void;
 }
 
 export default function QuestionPage({ $app }: QuestionProp) {
@@ -39,6 +40,16 @@ export default function QuestionPage({ $app }: QuestionProp) {
     };
   });
 
+  // 선택한 옵션이 정답인지 확인하는 함수
+  const setIsCorrect = (currentSelctedOption: number, currentOrder: number) => {
+    // 해당 값이 정답인 경우 isCorrect 값 변경
+    if (
+      currentSelctedOption === createdNumberQuestions[currentOrder - 1].answer
+    ) {
+      createdNumberQuestions[currentOrder - 1].isCorrect = true;
+    }
+  };
+
   const header = new Header({
     isMain: false,
   });
@@ -51,6 +62,7 @@ export default function QuestionPage({ $app }: QuestionProp) {
     rightNumber: createdNumberQuestions[0].rightNumber,
     answer: createdNumberQuestions[0].answer,
     isCorrect: false,
+    setIsCorrect,
   });
 
   $app?.appendChild(header.render());

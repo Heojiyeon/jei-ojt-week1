@@ -1,21 +1,22 @@
+interface OptionBarProp {
+  onClick: (currentSelectedOption: number) => void;
+}
+
 class OptionBar {
   private OptionBar: HTMLDivElement;
 
-  constructor() {
+  constructor({ onClick }: OptionBarProp) {
     this.OptionBar = document.createElement('div');
 
-    this.OptionBar.innerHTML = `
-        <button>0</button>
-        <button>1</button>
-        <button>2</button>
-        <button>3</button>
-        <button>4</button>
-        <button>5</button>
-        <button>6</button>
-        <button>7</button>
-        <button>8</button>
-        <button>9</button>
-        `;
+    for (let i = 0; i < 10; i++) {
+      const optionButton = document.createElement('button');
+      optionButton.addEventListener('click', () => {
+        onClick(i);
+      });
+      optionButton.innerText = String(i);
+
+      this.OptionBar.appendChild(optionButton);
+    }
   }
   render(): HTMLDivElement {
     return this.OptionBar;

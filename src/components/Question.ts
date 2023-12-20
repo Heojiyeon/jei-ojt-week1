@@ -5,12 +5,39 @@ class Question {
   private order: number;
   private leftNumber: number;
   private rightNumber: number;
+  private answer: number;
+
+  private isCorrect: boolean;
+  private setIsCorrect: (currentSelctedOption: number, order: number) => void;
+
+  private selectedOptionValue: number;
+  private setSelectedOptionValue: (currentSelectedOption: number) => void;
+
   private Question: HTMLDivElement;
 
-  constructor({ order, leftNumber, rightNumber }: QuestionContent) {
+  constructor({
+    order,
+    leftNumber,
+    rightNumber,
+    answer,
+    isCorrect,
+    setIsCorrect,
+  }: QuestionContent) {
     this.order = order;
     this.leftNumber = leftNumber;
     this.rightNumber = rightNumber;
+    this.answer = answer;
+    this.isCorrect = isCorrect;
+
+    this.setIsCorrect = setIsCorrect;
+
+    this.selectedOptionValue = -1;
+
+    this.setSelectedOptionValue = (currentSelectedOption: number) => {
+      this.selectedOptionValue = currentSelectedOption;
+
+      this.setIsCorrect(this.selectedOptionValue, this.order);
+    };
 
     this.Question = document.createElement('div');
 
@@ -20,7 +47,19 @@ class Question {
     `;
 
     // optionBar 생성
-    this.Question.appendChild(new OptionBar().render());
+    /**
+     * OptionBar 생성
+     * 1. Question에 클릭된 값을 담을 수 있는 selctedOptionValue 생성
+     * 2. option 클릭 시, 해당 값을 변경할 수 있는 onClick 함수 전달
+     * 2. selectedOptionValue 가 -1이 아닌 경우, this.answer와 동등 비교
+     * 3. 정답 유무에 따라 isCorrect 값 변경
+     * 4. 다음 문제 출력
+     */
+    this.Question.appendChild(
+      new OptionBar({
+        onClick: this.setSelectedOptionValue,
+      }).render()
+    );
   }
 
   render(): HTMLDivElement {
