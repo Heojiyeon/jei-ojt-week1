@@ -1,5 +1,6 @@
 import { QuestionContent } from '../pages/question';
 import OptionBar from './common/OptionBar';
+import SVGRect from './svg/SVGRect';
 import SVGText from './svg/SVGText';
 
 class Question {
@@ -60,7 +61,7 @@ class Question {
       textContent: `${this.leftNumber} + ${this.rightNumber} = `,
       textWeight: 'Medium',
       locX: '177',
-      locY: '415',
+      locY: '425',
     });
 
     const svgTextRemaining = new SVGText({
@@ -73,6 +74,17 @@ class Question {
     svgElement.appendChild(svgTextTitle.render());
     svgElement.appendChild(svgTextFormula.render());
     svgElement.appendChild(svgTextRemaining.render());
+
+    // svg 에 rect 컴포넌트 생성
+    const svgRectAnswer = new SVGRect({
+      rectWidth: '30px',
+      rectHeight: '30px',
+      locX: '282',
+      locY: '402',
+      rectStyle: 'stroke:#67D091; fill: none',
+    });
+
+    svgElement.appendChild(svgRectAnswer.render());
 
     // optionBar 생성
     this.Question.appendChild(
