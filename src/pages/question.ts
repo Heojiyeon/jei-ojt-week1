@@ -1,10 +1,8 @@
 import Question from '../components/Question';
 import Footer from '../components/common/Footer';
 import Header from '../components/common/Header';
+import { push } from '../utils/router';
 
-type QuestionProp = {
-  $app: HTMLElement | null;
-};
 export interface QuestionContent {
   order: number;
   leftNumber: number;
@@ -16,7 +14,17 @@ export interface QuestionContent {
   setIsCorrect: (currentSelctedOption: number, order: number) => void;
 }
 
-export default function QuestionPage({ $app }: QuestionProp) {
+type QuestionProp = {
+  $app: HTMLElement | null;
+  setIsSolvedAll: () => void;
+  addCountOfCorrectAnswer: () => void;
+};
+
+export default function QuestionPage({
+  $app,
+  setIsSolvedAll,
+  addCountOfCorrectAnswer,
+}: QuestionProp) {
   // 현재 문제 order 값 저장
   let currentOrder = 0;
 
@@ -91,11 +99,17 @@ export default function QuestionPage({ $app }: QuestionProp) {
       currentSelctedOption === createdNumberQuestions[currentOrder - 1].answer
     ) {
       createdNumberQuestions[currentOrder - 1].isCorrect = true;
+      addCountOfCorrectAnswer();
     }
 
     setIsSolved(currentOrder);
 
-    createQuestion(currentOrder);
+    if (currentOrder < 10) {
+      createQuestion(currentOrder);
+    } else {
+      setIsSolvedAll();
+      push('/result');
+    }
   };
 
   const header = new Header({
