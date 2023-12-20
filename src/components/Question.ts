@@ -1,5 +1,6 @@
 import { QuestionContent } from '../pages/question';
 import OptionBar from './common/OptionBar';
+import SVGText from './common/SVGText';
 
 class Question {
   private order: number;
@@ -34,11 +35,29 @@ class Question {
     };
 
     this.Question = document.createElement('div');
-
     this.Question.innerHTML = `
-        <h2>${this.order}. 다음 덧셈을 입력하세요.</h2>
-        <div>${this.leftNumber} + ${this.rightNumber}</div>
-    `;
+     <h2>${this.order}. 다음 덧셈을 입력하세요.</h2>
+     <div>${this.leftNumber} + ${this.rightNumber}</div>
+     `;
+
+    // svg 생성
+    const svgElement = document.createElementNS(
+      'http://www.w3.org/2000/svg',
+      'svg'
+    );
+
+    svgElement.setAttribute('width', '300px');
+    svgElement.setAttribute('height', '300px');
+    svgElement.setAttribute('viewbox', '0 0 800 500');
+
+    this.Question.appendChild(svgElement);
+
+    // svg 에 text 컴포넌트 생성
+    const svgText = new SVGText({
+      textContent: `${this.order}. 다음 덧셈을 하세요.`,
+    });
+
+    svgElement.appendChild(svgText.render());
 
     // optionBar 생성
     /**
