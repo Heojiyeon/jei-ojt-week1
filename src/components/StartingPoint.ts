@@ -57,6 +57,12 @@ class StartingPoint {
      */
     const handleRouter = () => push('/question');
 
+    const startGameButton = document.createElementNS(
+      'http://www.w3.org/2000/svg',
+      'g'
+    );
+    startGameButton.setAttribute('class', 'start-game-button');
+
     const svgRectStartGameButton = new SVGRect({
       rectWidth: '300px',
       rectHeight: '60px',
@@ -64,7 +70,6 @@ class StartingPoint {
       locY: '470',
       rectStyle: 'fill:#FFEBED;',
       rectRadius: '10',
-      onClick: handleRouter,
     });
 
     const svgTextStartGameContent = new SVGText({
@@ -75,8 +80,12 @@ class StartingPoint {
       textColor: '#E5001A',
     });
 
-    svgElement.appendChild(svgRectStartGameButton.render());
-    svgElement.appendChild(svgTextStartGameContent.render());
+    startGameButton.appendChild(svgRectStartGameButton.render());
+    startGameButton.appendChild(svgTextStartGameContent.render());
+
+    startGameButton.addEventListener('click', handleRouter);
+
+    svgElement.appendChild(startGameButton);
   }
   render(): HTMLDivElement {
     return this.StartingPoint;
