@@ -105,7 +105,7 @@ class Question {
      */
 
     const svgPathBundle = new SVGPath({
-      dValue: 'M 240 316 C 240 200, 280 330, 280 315',
+      dValue: 'M 230 316 C 230 200, 265 330, 270 315',
     });
 
     this.leftNumber !== 0 &&
@@ -113,7 +113,7 @@ class Question {
       svgElement.appendChild(svgPathBundle.render());
 
     const createQuestionBundle = (dir: string, count: number) => {
-      const locXValue = dir === 'left' ? 260 - 22 * count : 270;
+      const locXValue = dir === 'left' ? 250 - 22 * count : 260;
       const svgRectQuestionBundle = new SVGRect({
         rectWidth: String(22 * count),
         rectHeight: '24',
@@ -133,7 +133,7 @@ class Question {
       count: number,
       circleColor: string
     ) => {
-      const locXValue = dir === 'left' ? 260 - 20 * count : 280;
+      const locXValue = dir === 'left' ? 250 - 20 * count : 270;
 
       for (let i = 0; i < count; i++) {
         const svgCircleQuestionContent = new SVGCircle({
@@ -154,7 +154,7 @@ class Question {
     const svgRectAnswer = new SVGRect({
       rectWidth: '30px',
       rectHeight: '30px',
-      locX: '282',
+      locX: '270',
       locY: '402',
       rectStyle: 'stroke:#67D091; fill: none',
     });
@@ -173,13 +173,26 @@ class Question {
     svgElement.appendChild(svgRectAnswer.render());
     svgElement.appendChild(svgRectOptionBG.render());
 
+    // option click event
+    const onOptionButtonClick = (currentSelectedOption: number) => {
+      setTimeout(() => {
+        this.setSelectedOptionValue(currentSelectedOption);
+        return;
+      }, 1000);
+
+      const svgTextAnswer = new SVGText({
+        textContent: `${currentSelectedOption}`,
+        textWeight: 'Medium',
+        locX: '278',
+        locY: '425',
+        textColor: '#E5001A',
+      });
+
+      svgElement.appendChild(svgTextAnswer.render());
+    };
+
     const createOptionBar = () => {
       let locXvalue = 27;
-
-      // option click event
-      const onOptionButtonClick = (currentSelectedOption: number) => {
-        this.setSelectedOptionValue(currentSelectedOption);
-      };
 
       for (let i = 0; i < 10; i++) {
         const svgRectOptionButton = new SVGRect({

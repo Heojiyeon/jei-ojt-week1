@@ -1,5 +1,4 @@
 import Question from '../components/Question';
-import Header from '../components/common/Header';
 import { push } from '../utils/router';
 
 export interface QuestionContent {
