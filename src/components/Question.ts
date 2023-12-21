@@ -38,7 +38,7 @@ class Question {
 
     this.Question = document.createElement('div');
 
-    // svg 생성
+    // svg
     const svgElement = document.createElementNS(
       'http://www.w3.org/2000/svg',
       'svg'
@@ -50,7 +50,31 @@ class Question {
 
     this.Question.appendChild(svgElement);
 
-    // svg 에 text 컴포넌트 생성
+    /**
+     * Header
+     */
+    const svgRectHeaderBg = new SVGRect({
+      rectWidth: '500px',
+      rectHeight: '60px',
+      locX: '0',
+      locY: '0',
+      rectStyle: 'fill: #E5001A;',
+    });
+
+    const svgTextHeaderContent = new SVGText({
+      textContent: 'JEI 덧셈 게임',
+      textWeight: 'Bold',
+      locX: '20',
+      locY: '40',
+      textColor: '#FFF',
+    });
+
+    svgElement.appendChild(svgRectHeaderBg.render());
+    svgElement.appendChild(svgTextHeaderContent.render());
+
+    /**
+     * Question Content Text
+     */
     const svgTextTitle = new SVGText({
       textContent: `${this.order}. 다음 덧셈을 하세요.`,
       textWeight: 'Bold',
@@ -77,7 +101,7 @@ class Question {
     svgElement.appendChild(svgTextRemaining.render());
 
     /**
-     * questionContent
+     * questionContent Image
      */
 
     const svgPathBundle = new SVGPath({
@@ -125,7 +149,7 @@ class Question {
     createQuestionCircle('right', this.rightNumber, '#8181bf');
 
     /**
-     * 문제 정답 박스
+     * Question Answer
      */
     const svgRectAnswer = new SVGRect({
       rectWidth: '30px',

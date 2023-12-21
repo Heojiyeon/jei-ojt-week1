@@ -101,11 +101,5 @@ export default function QuestionPage({
     }
   };
 
-  const header = new Header({
-    isMain: false,
-  });
-
   createQuestion(currentOrder);
-
-  $app?.appendChild(header.render());
 }
