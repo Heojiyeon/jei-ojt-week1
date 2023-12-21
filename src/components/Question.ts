@@ -197,17 +197,17 @@ class Question {
      * OptionBar
      * 답을 선택할 수 있는 옵션 바 (0~9)
      */
-    const optionBar = document.createElementNS(
-      'http://www.w3.org/2000/svg',
-      'g'
-    );
-    optionBar.setAttribute('id', 'option-bar');
-
     const createOptionBar = () => {
       let locXvalue = 27;
       const locXNumValue = 40;
 
       for (let i = 0; i < 10; i++) {
+        const optionBar = document.createElementNS(
+          'http://www.w3.org/2000/svg',
+          'g'
+        );
+        optionBar.setAttribute('id', `option-bar-${i}`);
+
         const svgRectOptionButton = new SVGRect({
           rectWidth: '40px',
           rectHeight: '40px',
@@ -226,17 +226,14 @@ class Question {
 
         optionBar.appendChild(svgRectOptionButton.render());
         optionBar.appendChild(svgTextOptionNumber.render());
+
+        svgElement.appendChild(optionBar);
+
+        optionBar.addEventListener('click', () => onOptionButtonClick(i));
       }
-      svgElement.appendChild(optionBar);
     };
 
     createOptionBar();
-
-    optionBar.addEventListener('click', event => {
-      const target = event.target as HTMLInputElement;
-
-      onOptionButtonClick(Number(target.innerHTML));
-    });
   }
 
   render(): HTMLDivElement {
