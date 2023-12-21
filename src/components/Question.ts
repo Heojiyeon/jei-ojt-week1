@@ -1,5 +1,6 @@
 import { QuestionContent } from '../pages/question';
 import SVGCircle from './svg/SVGCircle';
+import SVGPath from './svg/SVGPath';
 import SVGRect from './svg/SVGRect';
 import SVGText from './svg/SVGText';
 
@@ -78,6 +79,14 @@ class Question {
     /**
      * questionContent
      */
+
+    const svgPathBundle = new SVGPath({
+      dValue: 'M 240 316 C 240 200, 280 330, 280 315',
+    });
+
+    this.leftNumber !== 0 &&
+      this.rightNumber !== 0 &&
+      svgElement.appendChild(svgPathBundle.render());
 
     const createQuestionBundle = (dir: string, count: number) => {
       const locXValue = dir === 'left' ? 260 - 22 * count : 270;
