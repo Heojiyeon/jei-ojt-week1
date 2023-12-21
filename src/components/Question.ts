@@ -175,12 +175,11 @@ class Question {
     svgElement.appendChild(svgRectOptionBG.render());
 
     // option click event
-    const onOptionButtonClick = (currentSelectedOption?: number) => {
-      currentSelectedOption &&
-        setTimeout(() => {
-          this.setSelectedOptionValue(currentSelectedOption);
-          return;
-        }, 1000);
+    const onOptionButtonClick = (currentSelectedOption: number) => {
+      setTimeout(() => {
+        this.setSelectedOptionValue(currentSelectedOption);
+        return;
+      }, 1000);
 
       const svgTextAnswer = new SVGText({
         textContent: `${currentSelectedOption}`,
