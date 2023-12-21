@@ -1,5 +1,4 @@
 import { QuestionContent } from '../pages/question';
-import OptionBar from './common/OptionBar';
 import SVGRect from './svg/SVGRect';
 import SVGText from './svg/SVGText';
 
@@ -75,7 +74,9 @@ class Question {
     svgElement.appendChild(svgTextFormula.render());
     svgElement.appendChild(svgTextRemaining.render());
 
-    // svg 에 rect 컴포넌트 생성
+    /**
+     * 문제 정답 박스
+     */
     const svgRectAnswer = new SVGRect({
       rectWidth: '30px',
       rectHeight: '30px',
@@ -84,12 +85,15 @@ class Question {
       rectStyle: 'stroke:#67D091; fill: none',
     });
 
+    /**
+     * OptionBar
+     */
     const svgRectOptionBG = new SVGRect({
       rectWidth: '454px',
       rectHeight: '50px',
       locX: '23',
       locY: '572',
-      rectStyle: 'fill:#D9D9D9; rx: 10px; ry:10px',
+      rectStyle: 'fill:#D9D9D9; rx: 10px; ry:10px;',
     });
 
     svgElement.appendChild(svgRectAnswer.render());
@@ -98,6 +102,11 @@ class Question {
     const createOptionBar = () => {
       let locXvalue = 27;
 
+      // option click event
+      const onOptionButtonClick = (currentSelectedOption: number) => {
+        this.setSelectedOptionValue(currentSelectedOption);
+      };
+
       for (let i = 0; i < 10; i++) {
         const svgRectOptionButton = new SVGRect({
           rectWidth: '40px',
@@ -105,6 +114,8 @@ class Question {
           locX: i !== 0 ? String(locXvalue + 45 * i) : String(locXvalue),
           locY: '577',
           rectStyle: 'fill:#FFFEFE; rx: 10px; ry:10px',
+          value: String(i),
+          onClick: onOptionButtonClick,
         });
         svgElement.appendChild(svgRectOptionButton.render());
       }
@@ -112,12 +123,21 @@ class Question {
 
     createOptionBar();
 
-    // optionBar 생성
-    this.Question.appendChild(
-      new OptionBar({
-        onClick: this.setSelectedOptionValue,
-      }).render()
-    );
+    const createOptionNumber = () => {
+      const locXValue = 40;
+
+      for (let i = 0; i < 10; i++) {
+        const svgTextOptionNumber = new SVGText({
+          textContent: `${i}`,
+          textWeight: 'Medium',
+          locX: i !== 0 ? String(locXValue + 45 * i) : String(locXValue),
+          locY: '608',
+        });
+        svgElement.appendChild(svgTextOptionNumber.render());
+      }
+    };
+
+    createOptionNumber();
   }
 
   render(): HTMLDivElement {
