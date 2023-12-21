@@ -11,7 +11,10 @@ class Result {
 
   constructor({ countOfCorrectAnswer }: ResultProp) {
     this.Result = document.createElement('div');
-    // svg
+
+    /**
+     * SVG
+     */
     const svgElement = document.createElementNS(
       'http://www.w3.org/2000/svg',
       'svg'

@@ -38,7 +38,9 @@ class Question {
 
     this.Question = document.createElement('div');
 
-    // svg
+    /**
+     * SVG
+     */
     const svgElement = document.createElementNS(
       'http://www.w3.org/2000/svg',
       'svg'
@@ -92,7 +94,7 @@ class Question {
     const svgTextRemaining = new SVGText({
       textContent: `남은 문제 수 : ${10 - this.order}`,
       textWeight: 'Bold',
-      locX: '278',
+      locX: '320',
       locY: '757',
     });
 
@@ -103,9 +105,8 @@ class Question {
     /**
      * questionContent Image
      */
-
     const svgPathBundle = new SVGPath({
-      dValue: 'M 230 316 C 230 200, 265 330, 270 315',
+      dValue: 'M 230 316 C 230 316, 250 290, 270 316',
     });
 
     this.leftNumber !== 0 &&
@@ -113,7 +114,7 @@ class Question {
       svgElement.appendChild(svgPathBundle.render());
 
     const createQuestionBundle = (dir: string, count: number) => {
-      const locXValue = dir === 'left' ? 250 - 22 * count : 260;
+      const locXValue = dir === 'left' ? 255 - 22 * count : 259;
       const svgRectQuestionBundle = new SVGRect({
         rectWidth: String(22 * count),
         rectHeight: '24',
