@@ -1,4 +1,5 @@
 import { QuestionContent } from '../pages/question';
+import SVGCircle from './svg/SVGCircle';
 import SVGRect from './svg/SVGRect';
 import SVGText from './svg/SVGText';
 
@@ -75,6 +76,30 @@ class Question {
     svgElement.appendChild(svgTextRemaining.render());
 
     /**
+     * questionContent
+     */
+
+    const createQuestionCircle = (
+      dir: string,
+      count: number,
+      circleColor: string
+    ) => {
+      const locXValue = dir === 'left' ? 260 - 20 * count : 280;
+
+      for (let i = 0; i < count; i++) {
+        const svgTextOptionNumber = new SVGCircle({
+          color: circleColor,
+          locX: i !== 0 ? String(locXValue + 20 * i) : String(locXValue),
+          locY: '330',
+        });
+        svgElement.appendChild(svgTextOptionNumber.render());
+      }
+    };
+
+    createQuestionCircle('left', this.leftNumber, '#f6927e');
+    createQuestionCircle('right', this.rightNumber, '#8181bf');
+
+    /**
      * 문제 정답 박스
      */
     const svgRectAnswer = new SVGRect({
@@ -113,7 +138,8 @@ class Question {
           rectHeight: '40px',
           locX: i !== 0 ? String(locXvalue + 45 * i) : String(locXvalue),
           locY: '577',
-          rectStyle: 'fill:#FFFEFE; rx: 10px; ry:10px',
+          rectStyle: 'fill:#FFFEFE;',
+          rectRadius: '10',
           value: String(i),
           onClick: onOptionButtonClick,
         });
