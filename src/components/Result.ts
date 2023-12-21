@@ -105,6 +105,13 @@ class Result {
      */
     const handleRouter = () => push('/');
 
+    const restartGameButton = document.createElementNS(
+      'http://www.w3.org/2000/svg',
+      'g'
+    );
+
+    restartGameButton.setAttribute('id', 'restart-game-button');
+
     const svgRectRestartGameButton = new SVGRect({
       rectWidth: '300px',
       rectHeight: '60px',
@@ -112,7 +119,6 @@ class Result {
       locY: '550',
       rectStyle: 'fill:#FFEBED;',
       rectRadius: '10',
-      onClick: handleRouter,
     });
 
     const svgTextRestartGameContent = new SVGText({
@@ -123,8 +129,12 @@ class Result {
       textColor: '#E5001A',
     });
 
-    svgElement.appendChild(svgRectRestartGameButton.render());
-    svgElement.appendChild(svgTextRestartGameContent.render());
+    restartGameButton.appendChild(svgRectRestartGameButton.render());
+    restartGameButton.appendChild(svgTextRestartGameContent.render());
+
+    restartGameButton.addEventListener('click', handleRouter);
+
+    svgElement.appendChild(restartGameButton);
   }
 
   render(): HTMLDivElement {
