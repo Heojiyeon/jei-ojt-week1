@@ -4,7 +4,7 @@ interface RectProp {
   locX: string;
   locY: string;
   rectStyle: string;
-  onClick?: (currentSelectedOption: number) => void;
+  onClick?: (currentSelectedOption?: number) => void;
   value?: string;
   rectRadius?: string;
 }
@@ -38,8 +38,12 @@ class SVGRect {
         : rectStyle
     );
 
-    if (onClick && value) {
-      this.SVGRect.addEventListener('click', () => onClick(Number(value)));
+    if (onClick) {
+      if (typeof value !== undefined) {
+        this.SVGRect.addEventListener('click', () => onClick(Number(value)));
+      } else {
+        this.SVGRect.addEventListener('click', () => onClick());
+      }
     }
   }
 
