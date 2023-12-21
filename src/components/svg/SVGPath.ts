@@ -1,7 +1,3 @@
-/**
- * 
-  <path d="M 100 400 q 150 -300 300 0" stroke="blue" stroke-width="5" fill="none" />
- */
 interface PathProp {
   dValue: string;
 }
