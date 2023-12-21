@@ -79,6 +79,22 @@ class Question {
      * questionContent
      */
 
+    const createQuestionBundle = (dir: string, count: number) => {
+      const locXValue = dir === 'left' ? 260 - 22 * count : 270;
+      const svgRectQuestionBundle = new SVGRect({
+        rectWidth: String(22 * count),
+        rectHeight: '24',
+        locX: dir === 'left' ? String(locXValue - 8) : String(locXValue),
+        locY: '317',
+        rectStyle:
+          'stroke-width:3px; stroke:#9fbfe2; fill:none; rx:10px; ry:10px;',
+      });
+      svgElement.appendChild(svgRectQuestionBundle.render());
+    };
+
+    createQuestionBundle('left', this.leftNumber);
+    createQuestionBundle('right', this.rightNumber);
+
     const createQuestionCircle = (
       dir: string,
       count: number,
@@ -87,12 +103,12 @@ class Question {
       const locXValue = dir === 'left' ? 260 - 20 * count : 280;
 
       for (let i = 0; i < count; i++) {
-        const svgTextOptionNumber = new SVGCircle({
+        const svgCircleQuestionContent = new SVGCircle({
           color: circleColor,
           locX: i !== 0 ? String(locXValue + 20 * i) : String(locXValue),
           locY: '330',
         });
-        svgElement.appendChild(svgTextOptionNumber.render());
+        svgElement.appendChild(svgCircleQuestionContent.render());
       }
     };
 
