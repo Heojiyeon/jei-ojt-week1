@@ -4,8 +4,6 @@ interface RectProp {
   locX: string;
   locY: string;
   rectStyle: string;
-  onClick?: (currentSelectedOption?: number) => void;
-  value?: string;
   rectRadius?: string;
 }
 
@@ -18,8 +16,6 @@ class SVGRect {
     locX,
     locY,
     rectStyle,
-    onClick,
-    value,
     rectRadius,
   }: RectProp) {
     this.SVGRect = document.createElementNS(
@@ -37,14 +33,6 @@ class SVGRect {
         ? `${rectStyle} rx:${rectRadius}px; ry:${rectRadius}px`
         : rectStyle
     );
-
-    if (onClick) {
-      if (typeof value !== undefined) {
-        this.SVGRect.addEventListener('click', () => onClick(Number(value)));
-      } else {
-        this.SVGRect.addEventListener('click', () => onClick());
-      }
-    }
   }
 
   render(): SVGElement {

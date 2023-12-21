@@ -193,8 +193,19 @@ class Question {
       svgElement.appendChild(svgTextAnswer.render());
     };
 
+    /**
+     * OptionBar
+     * 답을 선택할 수 있는 옵션 바 (0~9)
+     */
+    const optionBar = document.createElementNS(
+      'http://www.w3.org/2000/svg',
+      'g'
+    );
+    optionBar.setAttribute('id', 'option-bar');
+
     const createOptionBar = () => {
       let locXvalue = 27;
+      const locXNumValue = 40;
 
       for (let i = 0; i < 10; i++) {
         const svgRectOptionButton = new SVGRect({
@@ -204,30 +215,28 @@ class Question {
           locY: '577',
           rectStyle: 'fill:#FFFEFE;',
           rectRadius: '10',
-          value: String(i),
-          onClick: onOptionButtonClick,
         });
-        svgElement.appendChild(svgRectOptionButton.render());
+
+        const svgTextOptionNumber = new SVGText({
+          textContent: `${i}`,
+          textWeight: 'Medium',
+          locX: i !== 0 ? String(locXNumValue + 45 * i) : String(locXNumValue),
+          locY: '608',
+        });
+
+        optionBar.appendChild(svgRectOptionButton.render());
+        optionBar.appendChild(svgTextOptionNumber.render());
       }
+      svgElement.appendChild(optionBar);
     };
 
     createOptionBar();
 
-    const createOptionNumber = () => {
-      const locXValue = 40;
+    optionBar.addEventListener('click', event => {
+      const target = event.target as HTMLInputElement;
 
-      for (let i = 0; i < 10; i++) {
-        const svgTextOptionNumber = new SVGText({
-          textContent: `${i}`,
-          textWeight: 'Medium',
-          locX: i !== 0 ? String(locXValue + 45 * i) : String(locXValue),
-          locY: '608',
-        });
-        svgElement.appendChild(svgTextOptionNumber.render());
-      }
-    };
-
-    createOptionNumber();
+      onOptionButtonClick(Number(target.innerHTML));
+    });
   }
 
   render(): HTMLDivElement {
