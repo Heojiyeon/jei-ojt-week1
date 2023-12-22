@@ -112,7 +112,8 @@ class Question {
     svgElement.appendChild(svgPathBundle.render());
 
     const createQuestionBundle = (dir: string, count: number) => {
-      const locXValue = dir === 'left' ? 249 - 21 * count : 259;
+      const locXValue =
+        dir === 'left' ? 249 - 21 * (count === 0 ? 1 : count) : 259;
       const svgRectQuestionBundle = new SVGRect({
         rectWidth: count === 0 ? String(22) : String(22 * count),
         rectHeight: '24',
