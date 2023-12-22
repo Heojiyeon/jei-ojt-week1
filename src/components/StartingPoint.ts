@@ -61,7 +61,7 @@ class StartingPoint {
       'http://www.w3.org/2000/svg',
       'g'
     );
-    startGameButton.setAttribute('class', 'start-game-button');
+    startGameButton.setAttribute('id', 'start-game-button');
 
     const svgRectStartGameButton = new SVGRect({
       rectWidth: '300px',
@@ -84,6 +84,7 @@ class StartingPoint {
     startGameButton.appendChild(svgTextStartGameContent.render());
 
     startGameButton.addEventListener('click', handleRouter);
+    startGameButton.setAttribute('style', 'cursor:pointer;');
 
     svgElement.appendChild(startGameButton);
   }

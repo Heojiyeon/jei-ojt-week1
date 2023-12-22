@@ -111,6 +111,7 @@ class Result {
     );
 
     restartGameButton.setAttribute('id', 'restart-game-button');
+    restartGameButton.setAttribute('style', 'cursor:pointer;');
 
     const svgRectRestartGameButton = new SVGRect({
       rectWidth: '300px',

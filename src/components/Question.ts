@@ -229,6 +229,7 @@ class Question {
         svgElement.appendChild(optionBar);
 
         optionBar.addEventListener('click', () => onOptionButtonClick(i));
+        optionBar.setAttribute('style', 'cursor:pointer;');
       }
     };
 
