@@ -109,14 +109,12 @@ class Question {
       dValue: 'M 230 316 C 230 316, 250 290, 270 316',
     });
 
-    this.leftNumber !== 0 &&
-      this.rightNumber !== 0 &&
-      svgElement.appendChild(svgPathBundle.render());
+    svgElement.appendChild(svgPathBundle.render());
 
     const createQuestionBundle = (dir: string, count: number) => {
       const locXValue = dir === 'left' ? 249 - 21 * count : 259;
       const svgRectQuestionBundle = new SVGRect({
-        rectWidth: String(22 * count),
+        rectWidth: count === 0 ? String(22) : String(22 * count),
         rectHeight: '24',
         locX: dir === 'left' ? String(locXValue - 8) : String(locXValue),
         locY: '317',
