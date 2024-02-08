@@ -12,3 +12,5 @@
 ### 핵심 화면
 
 ![image](https://github.com/Heojiyeon/jei-ojt-week1/assets/33304871/e59fb57a-fa73-4d8d-92f3-06157b8284d4)
+
+Copyright © JEI corporation. All rights reserved.
